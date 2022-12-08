@@ -1,0 +1,23 @@
+[
+    {
+        "name": "Djarum Investment",
+        "address": "Jl. jalan ke pasar minggu",
+        "email": "djarumInvest@gmail.com",
+        "phoneNumber":"021-34567890",
+        "companyWebProfile":"www.djarumStack.org"
+    },
+    {
+        "name": "PT Mandiri Group Syariah,Tbk",
+        "address": "Jl. jalan ke pasar baru",
+        "email": "mandirigroupsyariah@gmail.com",
+        "phoneNumber":"021-1234567",
+        "companyWebProfile":"www.mandiriInvest.org"
+    },
+    {
+        "name": "PT Pamona Construction INT",
+        "address": "Jl. jalan dari dapur ke teras",
+        "email": "pamonaInvest@gmail.com",
+        "phoneNumber":"021-1234567890",
+        "companyWebProfile":"www.pamonaconstruction.com"
+    }
+]

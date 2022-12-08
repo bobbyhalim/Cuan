@@ -1,0 +1,29 @@
+{
+  "name": "cuan",
+  "version": "1.0.0",
+  "description": "PairProject_Cuan\r Konsep Project Cuan :\r User dapat membeli atau melakukan subscribe terhadap investasi yang tersedia pada beranda,user juga dapat melihat berapa user yang sudah membeli investasi tersebut.\r Admin dapat memposting investasi dan company.\r Admin dapat mendelete investasi dari beranda.\r User harus melakukan resgistrasi terlebh dahulu untuk Login.\r Setelah Login User masuk ke beranda,dimana user dapat melihat semua daftar investasi yang ada.\r User juga dapat melengkapi userProfile pada halaman userProfile.\r User dapat melihat daftar investasi yang mereka beli pada userProfile.\r User dapat melakukan top up untuk mengisi account balance mereka.\r User melakukan scan barcode untuk topup transaksi.\r Validasi pada Controller akan berjalan ketika user melakukan pembelian investasi\r akan mengurangi accountBalance dari user,ketika account balance kurang dari amount transaksi pembelian maka validasi akan berjalan.\r ketika klik buy maka akan muncul qr code dan notifikasi email ketika sukses melakukan pembelian investasi.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bobbyhalim/Cuan.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bobbyhalim/Cuan/issues"
+  },
+  "homepage": "https://github.com/bobbyhalim/Cuan#readme",
+  "dependencies": {
+    "ejs": "^3.1.8",
+    "express": "^4.18.2",
+    "pg": "^8.8.0",
+    "sequelize": "^6.26.0"
+  },
+  "devDependencies": {
+    "sequelize-cli": "^6.5.2"
+  }
+}

@@ -1,0 +1,26 @@
+[
+    {
+        "username": "Wahid",
+        "email": "avatar@gmail.com",
+        "password": "avatar123456",
+        "role": "admin"
+    },
+    {
+        "username": "Bobby",
+        "email": "avatar2@gmail.com",
+        "password": "avatar_123456",
+        "role": "admin"
+    },
+    {
+        "username": "mimin",
+        "email": "mimin@gmail.com",
+        "password": "mimin123456",
+        "role": "member"
+    },
+    {
+        "username": "mumun",
+        "email": "mumun@gmail.com",
+        "password": "mumun123456",
+        "role": "member"
+    }
+]

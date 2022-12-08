@@ -1,0 +1,38 @@
+[
+    {
+        "name": "Djarum Investment",
+        "investmentType": "Long Term",
+        "description": "profit +12% dari total investasi dalam kurun waktu 10 tahun",
+        "price": 200000,
+        "unitStock":100,
+        "CompanyId":1,
+        "like":3
+    },
+    {
+        "name": "Djarum Investment sub unit",
+        "investmentType": "Middle Term",
+        "description": "profit +6% dari total investasi dalam kurun waktu 4 tahun",
+        "price": 100000,
+        "unitStock":100,
+        "CompanyId":1,
+        "like":2
+    },
+    {
+        "name": "BJBR Investment",
+        "investmentType": "Short Term",
+        "description": "profit +2.5 % dari total investasi dalam kurun waktu 1 tahun",
+        "price": 50000,
+        "unitStock":1000,
+        "CompanyId":2,
+        "like":4
+    },
+    {
+        "name": "Pamona Property Investment",
+        "investmentType": "Middle Term",
+        "description": "profit +8% dari total investasi dalam kurun waktu 5 tahun",
+        "price": 150000,
+        "unitStock":180,
+        "CompanyId":3,
+        "like":0
+    }
+]

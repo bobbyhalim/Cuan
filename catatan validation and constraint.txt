@@ -1,0 +1,28 @@
+constraint:
+1.accountBalance:
+  -defaultValue:0
+pada semua field yang ada validasi notEmpty,notNull,jangan lupa constraint allowNull:false.
+validation:
+1.table Users:
+Field:	-username:notEmpty,notNull,unique.
+      	-password:notEmpty,notNull,min length 8.
+	-email:notEmpty,notNull,unique,isEmail.
+2.table Profiles:
+Field:	-fullname:notEmpty,notNull.
+	-dateOfBirth:notEmpty,notNull
+	-phoneNumber:notEmpty,notNull,isNumber
+3.Table Transactions:
+Field:	-unit:notEmpty,notNull,min 1.
+
+4.Table Companies:
+Field:	-name:notEmpty,notNull
+	-adress:notEmpty,notNull
+	-email:notEmpty,notNull,unique,isEmail.
+	-phoneNumber:notEmpty,notNull,isNumber.
+5.Table Investments:
+Field:	-name:notEmpty,notNull
+	-investmentType:notEmpty,notNull
+	-description:notEmpty,notNull
+	-price:notEmpty,notNull,min 10000.
+	-unitStock:notEmpty,notNull,min 10.
+	-CompanyId:notEmpty,notNull.

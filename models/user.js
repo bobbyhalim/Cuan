@@ -1,6 +1,6 @@
 'use strict';
 const {
-  Model
+  Model, Transaction
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
@@ -10,13 +10,57 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      User.hasOne(models.Profile)
+      User.hasMany(models.Transaction)
+      User.belongsToMany(models.Investment, {through:'Transaction'})
+      User.belongsToMany(models.Company, {through:'Transaction'})
     }
   };
   User.init({
-    username: DataTypes.STRING,
-    email: DataTypes.STRING,
-    password: DataTypes.STRING,
+    username: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true,
+      validate: {
+        notEmpty: {
+          msg: 'User Name is required'
+        },
+        notNull: {
+          msg: 'User Name is required'
+        }
+      }
+    },
+    email: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notEmpty: {
+          msg: 'Email is required'
+        },
+        notNull: {
+          msg: 'Email is required'
+        },
+        isEmail: {
+          msg: 'must be an email format'
+        }
+      }
+    },
+    password: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notEmpty: {
+          msg: 'Password is required'
+        },
+        notNull: {
+          msg: 'Password is required'
+        },
+        len: {
+          args: [8],
+          msg: 'Password must be at least 8 character' 
+        }
+      }
+    },
     role: DataTypes.STRING
   }, {
     sequelize,

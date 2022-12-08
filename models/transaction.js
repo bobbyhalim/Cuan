@@ -10,7 +10,9 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      Transaction.belongsToMany(models.Investment)
+      Transaction.belongsToMany(models.User)
+      Transaction.belongsToMany(models.Company)
     }
   };
   Transaction.init({
@@ -18,7 +20,18 @@ module.exports = (sequelize, DataTypes) => {
     UserId: DataTypes.INTEGER,
     CompanyId: DataTypes.INTEGER,
     price: DataTypes.INTEGER,
-    unit: DataTypes.INTEGER,
+    unit: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      validate: {
+        notEmpty: {
+          msg: 'Unit is required'
+        },
+        notNull: {
+          msg: 'Unit is required'
+        }
+      }
+    },
     amount: DataTypes.DECIMAL
   }, {
     sequelize,

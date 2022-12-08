@@ -18,3 +18,5 @@ catatan untuk ditambah:
 1.update schema / erd.
 2.seeding data(User,Company,Investment)
 3.set validation & constraint.
+4.set references FK dan association.
+5.set addcolumn migration.

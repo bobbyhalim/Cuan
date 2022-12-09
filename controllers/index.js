@@ -33,7 +33,7 @@ class Controller {
     static loginPage(req, res){
         let error = req.query.err || null
         let info = req.query.info || null  
-        res.render('formLogin',{error, info})
+        res.render('formLogin', {error, info})
     }
 
     static login(req, res){

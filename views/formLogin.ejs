@@ -8,6 +8,18 @@
 </head>
 <body>
     <center>
+        <div style="color: red;">
+            <% if (error) { %>
+                <%= error %>
+            <% } %>
+        </div>
+        
+        <div style="color: blue;">
+            <% if (info) { %>
+                <%= info %>
+            <% } %>
+        </div>
+
         <h1>LOGIN</h1>
         <form method="post" action="/user/login">
             <label for="username">Username</label><br>

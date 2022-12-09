@@ -14,6 +14,19 @@ module.exports = (sequelize, DataTypes) => {
       Investment.hasMany(models.Transaction)
       // Investment.belongsToMany(User,{through:'Transaction'})
     }
+
+    get formatPrice () {
+      return this.price.toLocaleString("id-ID", {style:"currency", currency:"IDR"});
+    }
+
+    static notif (data) {
+        return Investment.findAll({
+            attributes: [
+              [sequelize.fn('MAX', sequelize.col('like')), "max"],
+              [sequelize.fn('MIN', sequelize.col('like')), "min"]
+            ]
+        })
+    }
   };
   Investment.init({
     name: {

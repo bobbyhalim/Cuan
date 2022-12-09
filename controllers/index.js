@@ -1,5 +1,7 @@
 const {User, Profile, Company, Investment, Transaction} = require('../models')
 const { comparePassword } = require('../helpers/bcrypt')
+const { Op } = require('sequelize')
+const investment = require('../models/investment')
 
 class Controller {
 
@@ -66,27 +68,39 @@ class Controller {
         })
     }
 
-    static userHome(req, res){
-        // User.findOne()
-        Investment.findAll({
+    static home(req, res){
+        const search = req.query.search
+
+        let options = {
+            where: {},
             include: {
                 model: Company
+            },
+            order: [['price', 'ASC']]
+        }
+
+        if (search) {
+            options.where.name = {
+                [Op.iLike]: `%${search}%`
             }
+        }
+        let data = {}
+        Investment.findAll(options)
+        .then(investments => {
+            data.investments = investments;
+            return Investment.notif()
         })
-        .then((investments) => {
-            res.render('investment',{name: req.session.username, investments, info: req.query.info || ""})
-            // console.log(userProfile);
+        .then(notif => {
+            data.notif = notif[0].dataValues
+            res.render('investment', data)
         })
         .catch((err) => {
             res.send(err)
         });
-        
-        // console.log(req.session.userid);
     }
 
     static formAddDataProfileUser(req, res){
-        res.render('formAddProfile',{name: req.session.username})
-        // console.log(req.session.userid);
+        res.render('formAddProfile', {name: req.session.username})
     }
 
     static addProfileUser(req, res){
@@ -101,47 +115,6 @@ class Controller {
         Profile.create(formatData)
         .then((userProfile) => {
             res.redirect('/user/home')
-        })
-        .catch((err) => {
-            res.send(err)
-        })
-    }
-
-    static showAllInvestment(req, res){
-        Investment.findAll({
-            include:[Company]
-        })
-        .then((result) => {
-            res.render('InvestmentList', {investments: result, info: req.query.info || ""})
-            //res.send(result)
-        }).catch((err) => {
-            res.send(err)
-        });
-    }
-    static formUpdateDataUser(req, res){
-        UserProfile.findByPk(req.params.id)
-        .then((userProfile) => {
-            res.render('formEditDataProfile',{name: req.session.username, userProfile})
-        })
-        .catch((err) => {
-            res.send(err)
-        })
-    }
-
-    static updateDataUser(req, res){
-        UserProfile.update({
-            firstName: req.body.firstName,
-            lastName: req.body.lastName,
-            dateOfBirth: req.body.dateOfBirth,
-            email: req.body.email,
-            noHandphone: req.body.noHandphone,
-            // accountBalance: 0,
-            // "UserId": req.session.userid
-        }, {
-            where: {id: +req.params.id}
-        })
-        .then(() => {
-            res.redirect('/user/home/?info=Update Successfully')
         })
         .catch((err) => {
             res.send(err)
@@ -177,7 +150,22 @@ class Controller {
         .catch((err) => {
             res.send(err)
         })
-        
+    }
+
+    static Like(req, res) {
+        Investment.increment('like', {
+            where: { id: req.params.id }
+        })
+            .then(_ => res.redirect('/user/home'))
+            .catch(err => res.send(err))
+    }
+
+    static Buy(req, res) {
+        Investment.decrement('unitStock', {
+            where: { id: req.params.id }
+        })
+            .then(_ => res.redirect('/user/home'))
+            .catch(err => res.send(err))
     }
 
 }

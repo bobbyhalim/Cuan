@@ -1,4 +1,5 @@
 const route = require('express').Router()
+const { Router } = require('express')
 const Controller = require('../controllers/index')
 
 const middle1 = (req, res, next) => {
@@ -24,13 +25,14 @@ route.get('/user/register', Controller.registerPage)
 route.post('/user/register', Controller.addDataUser)
 route.get('/user/login', middle2, Controller.loginPage)
 route.post('/user/login', Controller.login)
-route.get('/user/home', middle1, Controller.userHome)
+route.get('/user/home', middle1, Controller.home)
 route.get('/user/profile', middle1, Controller.formAddDataProfileUser)
 route.post('/user/profile', Controller.addProfileUser)
-route.get('/user/profile/:id', middle1, Controller.formUpdateDataUser)
-route.post('/user/profile/:id', Controller.updateDataUser)
+route.get('/user/logout', Controller.logout)
+route.get('/user/home/buy/:id', Controller.Buy)
+route.get('/user/home/like/:id', Controller.Like)
 route.get('/user/balance/:id', middle1, Controller.formTopUpBalance)
 route.post('/user/balance/:id', middle1, Controller.topUpBalance)
-route.get('/user/logout', Controller.logout)
+
 
 module.exports = route

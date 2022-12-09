@@ -2,12 +2,20 @@
     <center>
         <%- include('partial/navbar') %>
     </center>
-    <% if (info) { %>
-        <div class="text-center alert <%= info.includes(" dihapus") ? "alert-danger" : "alert-primary" %>" role="alert">
-            <%= info %>
-        </div>
-        <% } %>
-
+            <center>
+                <div style="color: white; background-color: green;">
+                    Most like investment is <%= notif.max %> and the least like is <%= notif.min %>
+                </div>
+            </center>
+            
+    
+            <center>
+                <form action="/user/home" method="get">
+                    <input type="text" name="search">
+                    <button>Search</button>
+                </form>
+            </center>
+            
             <div class="container w-80">
                 <table class="table mb-10">
                     <thead>
@@ -38,7 +46,7 @@
                                     <%= investment.Company.name %>
                                 </td>
                                 <td>
-                                    <%= investment.price %>
+                                    <%= investment.formatPrice %>
                                 </td>
                                 <td>
                                     <%= investment.unitStock %>
@@ -47,8 +55,8 @@
                                     <%= investment.like %>
                                 </td>
                                 <td>
-                                    <a href="/investment/invest/<%= investments.id %>"class="btn btn-success">Invest</a><br><br>
-                                    <a href="/investment/sell/<%= investments.id %>" class="btn btn-success">Like</a>
+                                    <a href="/user/home/buy/<%= investment.id %>"class="btn btn-success">Invest</a><br><br>
+                                    <a href="/user/home/like/<%= investment.id %>" class="btn btn-success">Like</a>
                                 </td>
                             </tr>
                             <% }); %>

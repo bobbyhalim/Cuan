@@ -85,23 +85,20 @@ class Controller {
     }
 
     static formAddDataProfileUser(req, res){
-        res.render('addUserProfile',{name: req.session.username})
-        console.log(req.session.userid);
+        res.render('formAddProfile',{name: req.session.username})
+        // console.log(req.session.userid);
     }
 
     static addProfileUser(req, res){
         let formatData = {
-            firstName: req.body.firstName,
-            lastName: req.body.lastName,
+            fullName: req.body.fullname,
             dateOfBirth: req.body.dateOfBirth,
-            email: req.body.email,
-            noHandphone: req.body.noHandphone,
-            accountBalance: 0,
+            phoneNumber: req.body.phoneNumber,
             "UserId": req.session.userid
         }
         console.log(formatData);
 
-        UserProfile.create(formatData)
+        Profile.create(formatData)
         .then((userProfile) => {
             res.redirect('/user/home')
         })

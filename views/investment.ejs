@@ -1,6 +1,6 @@
-<%- include('partials/header') %>
+<%- include('partial/header') %>
     <center>
-        <%- include('partials/navbar') %>
+        <%- include('partial/navbar') %>
     </center>
     <% if (info) { %>
         <div class="text-center alert <%= info.includes(" dihapus") ? "alert-danger" : "alert-primary" %>" role="alert">
@@ -14,10 +14,11 @@
                         <tr>
                             <th scope="col">name</th>
                             <th scope="col">Investment Type</th>
+                            <th scope="col">Description</th>
                             <th scope="col">Company</th>
-                            <th scope="col">Buy Price</th>
-                            <th scope="col">Sell Price</th>
+                            <th scope="col">Price</th>
                             <th scope="col">UnitStock</th>
+                            <th scope="col">Like</th>
                             <th scope="col">Action</th>
                         </tr>
                     </thead>
@@ -31,24 +32,27 @@
                                     <%= investment.investmentType %>
                                 </td>
                                 <td>
+                                    <%= investment.description %>
+                                </td>
+                                <td>
                                     <%= investment.Company.name %>
                                 </td>
                                 <td>
-                                    <%= investment.buyPrice %>
-                                </td>
-                                <td>
-                                    <%= investment.sellPrice %>
+                                    <%= investment.price %>
                                 </td>
                                 <td>
                                     <%= investment.unitStock %>
                                 </td>
-                                <td><a href="/investment/invest/<%= investments.id %>"
-                                        class="btn btn-success">Invest</a> | <a
-                                        href="/investment/sell/<%= investments.id %>" class="btn btn-danger">Sell</a>
+                                <td>
+                                    <%= investment.like %>
+                                </td>
+                                <td>
+                                    <a href="/investment/invest/<%= investments.id %>"class="btn btn-success">Invest</a><br><br>
+                                    <a href="/investment/sell/<%= investments.id %>" class="btn btn-success">Like</a>
                                 </td>
                             </tr>
                             <% }); %>
                                 <hr>
                 </table>
             </div>
-            <%- include('partials/footer') %>
+            <%- include('partial/footer') %>

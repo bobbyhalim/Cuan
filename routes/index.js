@@ -1,44 +1,36 @@
-const express = require('express')
-const router = express.Router()
-const routerInvestment = require('./investmentRouter')
-const routerAccount = require('./profileRouter')
-const ControllerRegisterLogin = require('../controllers/controllerLoginRegister')
+const route = require('express').Router()
+const Controller = require('../controllers/index')
 
-
-const beforeLogin = (req, res, next) => {
-    if (req.session.user) {
+const middle1 = (req, res, next) => {
+    // console.log('hello from middle1');
+    if (req.session.username) {
         next()
     } else {
         res.redirect('/')
     }
 }
-//TODO Semua rooting menghandle Welcome Page , Register, Login dan Logout
-const afterLogin = (req, res, next) => {
-    if(req.session.user){
-        res.redirect('/investment')
+
+const middle2 = (req, res, next) => {
+    // console.log('hello from middle1');
+    if (req.session.username) {
+        res.redirect('/user/home')
     } else {
         next()
     }
 }
-    //*Memunculkan halaman Welcome Page yang memiliki 2 tombol yaitu Register dan Login
-    router.get('/' , afterLogin , ControllerRegisterLogin.landingPage)
 
-    //*Memunculkan halaman Register yang berisi form untuk membuat sebuah akun
-    router.get('/register' , afterLogin , ControllerRegisterLogin.formRegister)
+route.get('/', Controller.homePage)
+route.get('/user/register', Controller.registerPage)
+route.post('/user/register', Controller.addDataUser)
+route.get('/user/login', middle2, Controller.loginPage)
+route.get('/user/home', middle1, Controller.userHome)
+route.post('/user/login', Controller.login)
+route.get('/user/profile', middle1, Controller.formAddDataProfileUser)
+route.post('/user/profile', Controller.addProfileUser)
+route.get('/user/profile/:id', middle1, Controller.formUpdateDataUser)
+route.post('/user/profile/:id', Controller.updateDataUser)
+route.get('/user/balance/:id', middle1, Controller.formTopUpBalance)
+route.post('/user/balance/:id', middle1, Controller.topUpBalance)
+route.get('/user/logout', Controller.logout)
 
-    //!Memasukkan username serta password kedalam database. 
-    router.post('/register' ,  ControllerRegisterLogin.registerUser)
-
-    //*Memunculkan halaman Login yang berisi form yang nantinya akan disesuaikan apa yang di-input dengan yang berada di database.
-    router.get('/login' , afterLogin , ControllerRegisterLogin.formLogin)
-
-    //!Mendapatkan input dari form Login yang digunakan untuk verifikasi dengan database,render ke beranda posting (/posting).
-    router.post('/login'  , ControllerRegisterLogin.login)
-
-    //*Session destroy,redirect ke /
-    router.get('/logout' , ControllerRegisterLogin.logout)
-
-router.use('/investment' , beforeLogin , investmentRouter)
-router.use('/profile' , beforeLogin , profileRouter)
-
-module.exports = router
+module.exports = route

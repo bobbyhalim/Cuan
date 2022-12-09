@@ -11,7 +11,7 @@ app.use(session({
     resave: false,     
     saveUninitialized: false,     
     cookie: { 
-        maxAge: 500000 
+        maxAge: 1000000 
 } }))
 
 app.use(router);

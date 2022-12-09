@@ -1,4 +1,5 @@
 'use strict';
+const { hashingPassword }= require('../helpers/bcrypt');
 const {
   Model, Transaction
 } = require('sequelize');
@@ -12,8 +13,8 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       User.hasOne(models.Profile)
       User.hasMany(models.Transaction)
-      User.belongsToMany(models.Investment, {through:'Transaction'})
-      User.belongsToMany(models.Company, {through:'Transaction'})
+      // User.belongsToMany(Investment, {through:'Transaction'})
+      // User.belongsToMany(Company, {through:'Transaction'})
     }
   };
   User.init({
@@ -23,10 +24,10 @@ module.exports = (sequelize, DataTypes) => {
       unique: true,
       validate: {
         notEmpty: {
-          msg: 'User Name is required'
+          msg: 'Username is required'
         },
         notNull: {
-          msg: 'User Name is required'
+          msg: 'Username is required'
         }
       }
     },
@@ -65,6 +66,12 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'User',
+    hooks:{
+      beforeCreate:(user,options) => {
+        user.password = hashingPassword(user.password);
+        user.role = "member";  
+      }
+      }
   });
   return User;
 };

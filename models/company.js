@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       Company.hasMany(models.Investment)
       Company.hasMany(models.Transaction)
-      Company.belongsToMany(models.User, {through:'Transaction'})
+      // Company.belongsToMany(User, {through:'Transaction'})
     }
   };
   Company.init({
